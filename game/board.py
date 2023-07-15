@@ -7,24 +7,32 @@ class GameState:
     def __init__(self, size: int, p1_name: str, p2_name: str):
 
         # create players
-        self.player1 = Player(p1_name, 1, "#ff0000")
-        self.player2 = Player(p2_name, 2, "#0000ff")
+        self.player1 = Player(p1_name, 1, (255, 0, 0))
+        self.player2 = Player(p2_name, 2, (0, 0, 255))
         self.player1.opponent = self.player2
         self.player2.opponent = self.player1
 
         self.size = size
+        self.all_lines: list(Line) = []
+        self.last_moves: list(Move) = []
+        self.currentPlayer = self.player1
+        self.max_turns = 2 * size * (size + 1)
 
-        self.hor_lines: list(list(Line)) = []
+        self.hor_lines: list[list(Line)] = []
         for x in range(self.size):
             self.hor_lines.append([])
             for y in range(self.size + 1):
-                self.hor_lines[x] = Line("horizontal", x, y, self)
+                l = Line("horizontal", x, y, self)
+                self.hor_lines[x].append(l)
+                self.all_lines.append(l)
 
-        self.ver_lines: list(list(Line)) = []
+        self.ver_lines: list[list(Line)] = []
         for x in range(self.size + 1):
             self.ver_lines.append([])
             for y in range(self.size):
-                self.ver_lines[x] = Line("vertical", x, y, self)
+                l = Line("vertical", x, y, self)
+                self.ver_lines[x].append(l)
+                self.all_lines.append(l)
 
         # create quads
         self.fields = []
@@ -33,17 +41,31 @@ class GameState:
             for y in range(size):
                 self.fields[x].append(Field(x, y, self))
 
-        self.currentPlayer = self.player1
-        self.turn = 1
+    def perform(self, m: Move):
+        if m.player == self.currentPlayer:
+            print("ERROR: Move Player and Current Player dont match")
+            return
+        if not m.is_valid():
+            print("ERROR: Move is invalid")
+        fields = m.get_filling_fields()
+        for field in fields:
+            field.owner = m.player
+            m.player.score += 1
+        m.line.owner = m.player
+        if len(fields) > 0:
+            self.currentPlayer = m.player.opponent
+        self.last_moves.append(m)
 
-    def move_is_valid(self, move: Move):
-        return move.line.owner is None
+    def get_turn(self) -> int:
+        return len(self.last_moves) + 1
 
-    def move_fills_field(self, move: Move):
-        for f in move.line.fields:
-            if f.filled_line_num() == 3:
-                return True
-        return False
+    def get_winner(self):
+        if len(self.last_moves) < self.max_turns:
+            return None
+        return self.player1 if self.player1.score > self.player2.score else self.player2
+
+    def get_possible_moves(self, player: Player):
+        return [Move(l, player) for l in self.all_lines if l.owner is None]
 
 
 
