@@ -1,6 +1,4 @@
-from game.move import Move
 from game.player import *
-
 
 class GameState:
 
@@ -41,8 +39,8 @@ class GameState:
             for y in range(size):
                 self.fields[x].append(Field(x, y, self))
 
-    def perform(self, m: Move):
-        if m.player == self.currentPlayer:
+    def perform(self, m):
+        if m.player != self.currentPlayer:
             print("ERROR: Move Player and Current Player dont match")
             return
         if not m.is_valid():
@@ -52,7 +50,7 @@ class GameState:
             field.owner = m.player
             m.player.score += 1
         m.line.owner = m.player
-        if len(fields) > 0:
+        if len(fields) == 0:
             self.currentPlayer = m.player.opponent
         self.last_moves.append(m)
 
@@ -80,10 +78,10 @@ class Field:
         self.connect_to_lines()
 
     def connect_to_lines(self):
-        self.lines.append(self.state.hor_lines[self.x])
-        self.lines.append(self.state.hor_lines[self.x + 1])
-        self.lines.append(self.state.hor_lines[self.y])
-        self.lines.append(self.state.hor_lines[self.y + 1])
+        self.lines.append(self.state.hor_lines[self.x][self.y])
+        self.lines.append(self.state.hor_lines[self.x][self.y + 1])
+        self.lines.append(self.state.ver_lines[self.x][self.y])
+        self.lines.append(self.state.ver_lines[self.x + 1][self.y])
         for line in self.lines:
             line.fields.append(self)
 
@@ -115,3 +113,21 @@ class Line:
         self.owner: Player = None
         self.state = state
         self.fields: list(Field) = []
+
+class Move:
+    def __init__(self, l:Line, player:Player):
+        self.line = l
+        self.player = player
+
+    def is_valid(self):
+        return self.line.owner is None
+
+    def get_filling_fields(self) -> list[Field]:
+        k = []
+        for f in self.line.fields:
+            if f.filled_line_num() == 3:
+                k.append(f)
+        return k
+    def move_fills_field(self):
+        return len(self.get_filling_fields()) == 0
+

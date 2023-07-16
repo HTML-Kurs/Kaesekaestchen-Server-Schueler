@@ -1,3 +1,2 @@
-from player import *
-from move import *
-from board import *
+from game.player import *
+from game.board import *
