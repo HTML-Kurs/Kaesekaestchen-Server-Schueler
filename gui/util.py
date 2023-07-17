@@ -48,7 +48,7 @@ def game_loop(state: GameState, playerdict, t):
             print("TIME_LOSS")
             print("Winner: " + state.currentPlayer.opponent.name
                   + " -> " + str(state.currentPlayer.opponent.id))
-            return playerdict[state.currentPlayer].opponent.id
+            return state.currentPlayer.opponent.id
         print(f"Got move after {end - start} seconds")
         time.sleep(t - end + start)
         state.perform(m)
