@@ -19,7 +19,7 @@ def create_game(bot1, bot2, t, rnds):
     global player2_s
     player1_s = 0
     player2_s = 0
-    
+
     for i in range(rnds):
         state = GameState(5, bot1, bot2)
         playd = {state.player1: ai1, state.player2: ai2}
@@ -42,13 +42,13 @@ def game_loop(state: GameState, playerdict, t):
         print()
         print(f"Requesting move from {state.currentPlayer.name}")
         start = time.time()
-        m = playerdict[state.currentPlayer].get_move(state, state.currentPlayer)
+        m = playerdict[state.currentPlayer].get_move(state, state.currentPlayer, t)
         end = time.time()
         if end - start > t:
             print("TIME_LOSS")
-            print("Winner: " + playerdict[state.currentPlayer].opponent.name
-                  + " -> " + str(playerdict[state.currentPlayer].opponent.name.id))
-            return playerdict[state.currentPlayer].opponent.name.id
+            print("Winner: " + state.currentPlayer.opponent.name
+                  + " -> " + str(state.currentPlayer.opponent.id))
+            return playerdict[state.currentPlayer].opponent.id
         print(f"Got move after {end - start} seconds")
         time.sleep(t - end + start)
         state.perform(m)

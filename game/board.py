@@ -45,6 +45,7 @@ class GameState:
             return
         if not m.is_valid():
             print("ERROR: Move is invalid")
+            return
         fields = m.get_filling_fields()
         for field in fields:
             field.owner = m.player
@@ -53,6 +54,16 @@ class GameState:
         if len(fields) == 0:
             self.currentPlayer = m.player.opponent
         self.last_moves.append(m)
+
+    def undo_last_move(self):
+        m = self.last_moves[-1]
+        m.line.owner = None
+        fields = m.get_filling_fields()
+        for field in fields:
+            field.owner = None
+            m.player.score -= 1
+        self.currentPlayer = m.player
+        self.last_moves = self.last_moves[:-1]
 
     def get_turn(self) -> int:
         return len(self.last_moves) + 1
