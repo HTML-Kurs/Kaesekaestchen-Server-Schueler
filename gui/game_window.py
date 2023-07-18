@@ -10,24 +10,28 @@ D_GREY = (78, 78, 78)
 
 pygame.init()
 
-FONT = pygame.font.SysFont('Comic Sans MS', 30)
-
+FONT = pygame.font.SysFont('Comic Sans MS', 20)
+FONT2 = pygame.font.SysFont('Comic Sans MS', 13)
 field_size = 40
 padding = 5
 wall_width = 10
-padding_top = 50
+padding_top = 100
 
 def create_window(state:GameState, s1, s2, keep_open=False):
     global DISPLAY
     pygame.init()
     global FONT
+    global FONT2
+    global width
     FONT = pygame.font.SysFont('Comic Sans MS', 30)
+    FONT2 = pygame.font.SysFont('Comic Sans MS', 13)
     width = field_size * state.size + (padding * 2 + wall_width) * (state.size + 1)
     height = width + padding_top
     DISPLAY = pygame.display.set_mode((width, height), 0, 32)
     k = True
     while k  and (state.get_winner() is None or keep_open):
         k = k and update_board(state, s1, s2)
+    print("__________________________________________-")
 
 def get_color(owner:Player, default:(int, int, int)):
     if owner is None:
@@ -42,12 +46,22 @@ def update_board(state:GameState, s1, s2):
             return False
 
     DISPLAY.fill(WHITE)
+    if s1 == 0:
+        text_surface = FONT.render(f'{state.player1.score} - {state.player2.score}', False, BLACK)
+        rect = text_surface.get_rect(center=(width // 2, 50))
+        DISPLAY.blit(text_surface, rect)
+    else:
+        text_surface = FONT.render(f'{s1} - {s2}', False, BLACK)
+        rect = text_surface.get_rect(center=(width // 2, 50))
+        DISPLAY.blit(text_surface, rect)
 
-    text_surface = FONT.render(f'{state.player1.score} - {state.player2.score}', False, D_GREY)
-    DISPLAY.blit(text_surface, (200, 0))
+        text_surface = FONT.render(f'{state.player1.score} - {state.player2.score}', False, BLACK)
+        rect = text_surface.get_rect(center=(width // 2, 80))
+        DISPLAY.blit(text_surface, rect)
 
-    text_surface = FONT.render(f'{s1} - {s2}', False, BLACK)
-    DISPLAY.blit(text_surface, (20, 0))
+    text_surface = FONT2.render(f'{state.player1.name} - {state.player2.name}', False, D_GREY)
+    rect = text_surface.get_rect(center=(width // 2, 20))
+    DISPLAY.blit(text_surface, rect)
 
     for r in state.fields:
         for field in r:
