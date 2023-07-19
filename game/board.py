@@ -69,7 +69,7 @@ class GameState:
         return len(self.last_moves) + 1
 
     def get_winner(self):
-        if len(self.last_moves) < self.max_turns:
+        if self.player1.score + self.player2.score < self.size**2:
             return None
         return self.player1 if self.player1.score > self.player2.score else self.player2
 

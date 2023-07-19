@@ -35,7 +35,14 @@ def game_loop(state: GameState, playerdict, t, tv):
         print()
         print(f"Requesting move from {state.currentPlayer.name}")
         start = time.time()
-        m = playerdict[state.currentPlayer].get_move(state, state.currentPlayer, t)
+        try:
+            m = playerdict[state.currentPlayer].get_move(state, state.currentPlayer, t)
+        except:
+            print("PRINT_EXCEPTION_LOSS")
+            print("Winner: " + state.currentPlayer.opponent.name
+                  + " -> " + str(state.currentPlayer.opponent.id))
+            state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
+            return state.currentPlayer.opponent.id
         end = time.time()
         if end - start > t:
             print("TIME_LOSS")
