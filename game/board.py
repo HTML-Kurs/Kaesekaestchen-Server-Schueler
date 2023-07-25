@@ -133,7 +133,7 @@ class Move:
     def is_valid(self):
         return self.line.owner is None
 
-    def get_filling_fields(self) -> list[Field]:
+    def get_filling_fields(self):
         k = []
         for f in self.line.fields:
             if f.filled_line_num() == 3:
