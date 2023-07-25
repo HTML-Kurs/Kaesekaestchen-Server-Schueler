@@ -17,9 +17,7 @@ def create_game(bot, t, both):
 
     Thread(target=game_loop, args=(state, ai, t, bot)).start()
     create_window(state, 0, 0, player_move=True)
-
-    if both:
-        create_window(state, 0, 0, True)
+    create_window(state, 0, 0, True)
 
 def game_loop(state: GameState, ai, max_time, botname):
     while state.get_winner() is None:
