@@ -30,6 +30,7 @@ def create_game(bot1, bot2, t, both, tv):
         create_window(state, 0, 0, True)
 
 def game_loop(state: GameState, playerdict, t, tv):
+    time.sleep(1)
     print("[Game Started]")
     for _ in range(state.max_turns):
         print()

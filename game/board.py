@@ -66,7 +66,7 @@ class GameState:
         self.last_moves = self.last_moves[:-1]
 
     def get_turn(self) -> int:
-        return len(self.last_moves) + 1
+        return self.max_turns - len([l for l in self.all_lines if l.owner is None])
 
     def get_winner(self):
         if self.player1.score + self.player2.score < self.size**2:
@@ -112,8 +112,13 @@ class Field:
         return self.filled_line_num() == 4
 
     def filled_line_num(self):
-        return len([l for l in self.lines if l.owner is not None])
+        return len(self.get_filled_lines())
 
+    def get_filled_lines(self):
+        return [l for l in self.lines if l.owner is not None]
+
+    def get_unfilled_lines(self):
+        return [l for l in self.lines if l.owner is None]
 
 class Line:
 

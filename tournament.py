@@ -3,7 +3,7 @@ import gui
 import os
 import time
 
-max_time = 1.5
+max_time = 5.0
 bots = gui.load_bots()
 scores = {key: [0, 0] for key in bots}
 
