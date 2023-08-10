@@ -1,8 +1,9 @@
+import copy
 import threading
 from pydoc import importfile
 import time
 from threading import Thread
-from game import GameState
+from game import GameState, Move
 from gui.game_window import create_window
 
 
@@ -35,9 +36,14 @@ def game_loop(state: GameState, playerdict, t, tv):
     for _ in range(state.max_turns):
         print()
         print(f"Requesting move from {state.currentPlayer.name}")
+        copy_state = copy.deepcopy(state)
         start = time.time()
         try:
-            m = playerdict[state.currentPlayer].get_move(state, state.currentPlayer, t)
+            c_m = playerdict[state.currentPlayer].get_move(copy_state, copy_state.currentPlayer, t)
+            if c_m.line.dir == "horizontal":
+                m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+            else:
+                m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
         except:
             print("PRINT_EXCEPTION_LOSS")
             print("Winner: " + state.currentPlayer.opponent.name

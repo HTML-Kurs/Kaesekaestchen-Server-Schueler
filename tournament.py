@@ -1,7 +1,11 @@
+import copy
+
 import game
 import gui
 import os
 import time
+
+from game import Move
 
 max_time = 5.0
 bots = gui.load_bots()
@@ -28,9 +32,14 @@ for bot1 in bots:
         state = game.GameState(5, bot1, bot2)
         playd = {state.player1: ai1, state.player2: ai2}
         while state.get_winner() is None:
+            copy_state = copy.deepcopy(state)
             start = time.time()
             try:
-                m = playd[state.currentPlayer].get_move(state, state.currentPlayer, max_time)
+                c_m = playd[state.currentPlayer].get_move(copy_state, copy_state.currentPlayer, max_time)
+                if c_m.line.dir == "horizontal":
+                    m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+                else:
+                    m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
             except:
                 state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
                 break
