@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module game.board</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="game.html"><font color="#ffffff">game</font></a>.board</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cjakob%5Cdesktop%5Cprogrammierenundcode%5Cschule%5Ckaesekaestchen-server%5Cgame%5Cboard.py">c:\users\jakob\desktop\programmierenundcode\schule\kaesekaestchen-server\game\board.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="game.board.html#Field">Field</a>
+</font></dt><dt><font face="helvetica, arial"><a href="game.board.html#GameState">GameState</a>
+</font></dt><dt><font face="helvetica, arial"><a href="game.board.html#Line">Line</a>
+</font></dt><dt><font face="helvetica, arial"><a href="game.board.html#Move">Move</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Field">class <strong>Field</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Field">Field</a>(x:&nbsp;int,&nbsp;y:&nbsp;int,&nbsp;state:&nbsp;game.board.<a href="#GameState">GameState</a>)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Field-__init__"><strong>__init__</strong></a>(self, x: int, y: int, state: game.board.GameState)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Field-connect_to_lines"><strong>connect_to_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-filled_line_num"><strong>filled_line_num</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_bottom_line"><strong>get_bottom_line</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_filled_lines"><strong>get_filled_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_left_line"><strong>get_left_line</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_right_line"><strong>get_right_line</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_top_line"><strong>get_top_line</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-get_unfilled_lines"><strong>get_unfilled_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Field-is_filled"><strong>is_filled</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GameState">class <strong>GameState</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#GameState">GameState</a>(size:&nbsp;int,&nbsp;p1_name:&nbsp;str,&nbsp;p2_name:&nbsp;str)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GameState-__init__"><strong>__init__</strong></a>(self, size: int, p1_name: str, p2_name: str)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="GameState-get_possible_moves"><strong>get_possible_moves</strong></a>(self, player: game.player.Player)</dt></dl>
+
+<dl><dt><a name="GameState-get_turn"><strong>get_turn</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="GameState-get_winner"><strong>get_winner</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GameState-perform"><strong>perform</strong></a>(self, m)</dt></dl>
+
+<dl><dt><a name="GameState-undo_last_move"><strong>undo_last_move</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Line">class <strong>Line</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Line">Line</a>(dir,&nbsp;x:&nbsp;int,&nbsp;y:&nbsp;int,&nbsp;state:&nbsp;game.board.<a href="#GameState">GameState</a>)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Line-__init__"><strong>__init__</strong></a>(self, dir, x: int, y: int, state: game.board.GameState)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Move">class <strong>Move</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Move">Move</a>(l:&nbsp;game.board.<a href="#Line">Line</a>,&nbsp;player:&nbsp;game.player.Player)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Move-__init__"><strong>__init__</strong></a>(self, l: game.board.Line, player: game.player.Player)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Move-get_filling_fields"><strong>get_filling_fields</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Move-is_valid"><strong>is_valid</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Move-move_fills_field"><strong>move_fills_field</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
