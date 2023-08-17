@@ -144,6 +144,7 @@ class Move:
             if f.filled_line_num() == 3:
                 k.append(f)
         return k
+
     def move_fills_field(self):
         return len(self.get_filling_fields()) == 0
 
