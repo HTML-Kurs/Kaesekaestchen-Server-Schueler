@@ -35,15 +35,15 @@ def game_loop(state: GameState, playerdict, t, tv):
     print("[Game Started]")
     for _ in range(state.max_turns):
         print()
-        print(f"Requesting move from {state.currentPlayer.name}")
+        print(f"Requesting move from {state.current_player.name}")
         copy_state = copy.deepcopy(state)
         start = time.time()
         # try:
-        c_m = playerdict[state.currentPlayer].get_move(copy_state, copy_state.currentPlayer, t)
+        c_m = playerdict[state.current_player].get_move(copy_state, copy_state.current_player, t)
         if c_m.line.dir == "horizontal":
-            m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+            m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.current_player)
         else:
-            m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+            m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.current_player)
         # except:
         #     print("PRINT_EXCEPTION_LOSS")
         #     print("Winner: " + state.currentPlayer.opponent.name
@@ -53,10 +53,10 @@ def game_loop(state: GameState, playerdict, t, tv):
         end = time.time()
         if end - start > t:
             print("TIME_LOSS")
-            print("Winner: " + state.currentPlayer.opponent.name
-                  + " -> " + str(state.currentPlayer.opponent.id))
-            state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
-            return state.currentPlayer.opponent.id
+            print("Winner: " + state.current_player.opponent.name
+                  + " -> " + str(state.current_player.opponent.id))
+            state.current_player.opponent.score = state.size ** 2 - state.current_player.score
+            return state.current_player.opponent.id
         print(f"Got move after {end - start} seconds")
         if tv:
             time.sleep(t - end + start)

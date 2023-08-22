@@ -60,8 +60,8 @@ def update_board(state: GameState, s1, s2, player_move):
                         x_cord = (padding + wall_width) * (1 + line.x) + (padding + field_size) * line.x + padding
                         y_cord = (padding) * (1 + line.y) + (padding + field_size + wall_width) * line.y + padding_top
                         if pos_in_rect(pos, x_cord, y_cord, field_size, wall_width):
-                            if state.currentPlayer.name == "Player":
-                                m = Move(line, state.currentPlayer)
+                            if state.current_player.name == "Player":
+                                m = Move(line, state.current_player)
                                 if m.is_valid():
                                     state.perform(m)
                             break
@@ -72,8 +72,8 @@ def update_board(state: GameState, s1, s2, player_move):
                         y_cord = (padding + wall_width) * (1 + line.y) + (
                                     padding + field_size) * line.y + padding_top + padding
                         if pos_in_rect(pos, x_cord, y_cord, wall_width, field_size):
-                            if state.currentPlayer.name == "Player":
-                                m = Move(line, state.currentPlayer)
+                            if state.current_player.name == "Player":
+                                m = Move(line, state.current_player)
                                 if m.is_valid():
                                     state.perform(m)
                             break

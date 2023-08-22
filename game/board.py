@@ -13,7 +13,7 @@ class GameState:
         self.size = size
         self.all_lines: list(Line) = []
         self.last_moves: list(Move) = []
-        self.currentPlayer = self.player1
+        self.current_player = self.player1
         self.max_turns = 2 * size * (size + 1)
 
         self.hor_lines: list[list(Line)] = []
@@ -40,7 +40,7 @@ class GameState:
                 self.fields[x].append(Field(x, y, self))
 
     def perform(self, m):
-        if m.player != self.currentPlayer:
+        if m.player != self.current_player:
             print("ERROR: Move Player and Current Player dont match")
             return
         if not m.is_valid():
@@ -52,7 +52,7 @@ class GameState:
             m.player.score += 1
         m.line.owner = m.player
         if len(fields) == 0:
-            self.currentPlayer = m.player.opponent
+            self.current_player = m.player.opponent
         self.last_moves.append(m)
 
     def undo_last_move(self):
@@ -62,7 +62,7 @@ class GameState:
         for field in fields:
             field.owner = None
             m.player.score -= 1
-        self.currentPlayer = m.player
+        self.current_player = m.player
         self.last_moves = self.last_moves[:-1]
 
     def get_turn(self) -> int:

@@ -35,17 +35,17 @@ for bot1 in bots:
             copy_state = copy.deepcopy(state)
             start = time.time()
             try:
-                c_m = playd[state.currentPlayer].get_move(copy_state, copy_state.currentPlayer, max_time)
+                c_m = playd[state.current_player].get_move(copy_state, copy_state.current_player, max_time)
                 if c_m.line.dir == "horizontal":
-                    m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+                    m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.current_player)
                 else:
-                    m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+                    m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.current_player)
             except:
-                state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
+                state.current_player.opponent.score = state.size ** 2 - state.current_player.score
                 break
             end = time.time()
             if end - start > max_time:
-                state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
+                state.current_player.opponent.score = state.size ** 2 - state.current_player.score
                 break
             state.perform(m)
         scores[state.get_winner().name][0] += 1

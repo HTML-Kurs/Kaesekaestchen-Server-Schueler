@@ -22,23 +22,23 @@ def create_game(bot, t, both):
 
 def game_loop(state: GameState, ai, max_time, botname):
     while state.get_winner() is None:
-        if state.currentPlayer.name != botname:
+        if state.current_player.name != botname:
             time.sleep(0.1)
             continue
         copy_state = copy.deepcopy(state)
         start = time.time()
         try:
-            c_m = ai.get_move(copy_state, copy_state.currentPlayer, max_time)
+            c_m = ai.get_move(copy_state, copy_state.current_player, max_time)
             if c_m.line.dir == "horizontal":
-                m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+                m = Move(state.hor_lines[c_m.line.x][c_m.line.y], state.current_player)
             else:
-                m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.currentPlayer)
+                m = Move(state.ver_lines[c_m.line.x][c_m.line.y], state.current_player)
         except:
-            state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
+            state.current_player.opponent.score = state.size ** 2 - state.current_player.score
             break
         end = time.time()
         if end - start > max_time:
-            state.currentPlayer.opponent.score = state.size ** 2 - state.currentPlayer.score
+            state.current_player.opponent.score = state.size ** 2 - state.current_player.score
             break
         state.perform(m)
     return state.get_winner().id
