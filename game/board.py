@@ -146,5 +146,5 @@ class Move:
         return k
 
     def move_fills_field(self):
-        return len(self.get_filling_fields()) == 0
+        return len(self.get_filling_fields()) != 0
 
